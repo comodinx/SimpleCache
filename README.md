@@ -233,9 +233,10 @@ SimpleCache.isExpirated("a.key2") // return true
 ```swift
 import SimpleCache
 
-public class MyCache: SimpleCacheProtocol {
+public class MyCache: SimpleCacheProtocol
+{
 
-    private let cache: [String : AnyObject] = [:]
+    private var cache: [String : AnyObject] = [:]
 
     public func dictionaryRepresentation() -> [String : AnyObject] {
         return cache
@@ -256,10 +257,10 @@ public class MyCache: SimpleCacheProtocol {
     public func remove(key: String) -> AnyObject? {
         return cache.removeValueForKey(key)
     }
-
+    
 }
 
-// Configure in AppDelegate
+// Configure in AppDelegate.swift
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // ...
