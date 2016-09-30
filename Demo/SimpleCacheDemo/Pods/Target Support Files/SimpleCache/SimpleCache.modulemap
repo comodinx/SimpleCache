@@ -1,0 +1,6 @@
+framework module SimpleCache {
+  umbrella header "SimpleCache-umbrella.h"
+
+  export *
+  module * { export * }
+}
