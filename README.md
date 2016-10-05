@@ -92,10 +92,10 @@ dispatch_after(
 )
 
 // Clean the cache
-// SimpleCache.clear()
+SimpleCache.clear()
 
 // Clean expired keys from cache
-// SimpleCache.cleanExpirated()
+SimpleCache.cleanExpirated()
 ```
 
 #### API
@@ -111,10 +111,10 @@ SimpleCache.DEFAULT_CACHE_SECONDS: Int = 60 // Default is 1 minute
 SimpleCache.DEFAULT_CACHE_SECONDS = 5 * 60 // 5 minute
 ```
 
-Expired time in `seconds`. Default is `60`
+Cache protocol. Default use user defaults
 
 ```swift
-SimpleCache.CACHE_PROTOCOL: SimpleCacheProtocol = UserDefaultsCache.sharedInstance = 60 // Default cache use user defaults
+SimpleCache.CACHE_PROTOCOL: SimpleCacheProtocol = UserDefaultsCache.sharedInstance // Default cache use user defaults
 
 // Configure other cache
 SimpleCache.CACHE_PROTOCOL = MyCache()
@@ -243,7 +243,10 @@ public class MyCache: SimpleCacheProtocol
     }
 
     public func get(key: String, defaultValue: AnyObject? = nil) -> AnyObject? {
-        return cache[key]
+        if let value = cache[key] {
+            return value
+        }
+        return defaultValue
     }
 
     public func put(key: String, value: AnyObject?) {
