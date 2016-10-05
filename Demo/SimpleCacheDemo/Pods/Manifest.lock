@@ -1,5 +1,5 @@
 PODS:
-  - SimpleCache (0.1.0)
+  - SimpleCache (0.2.1)
   - SimpleLayout (0.1.1)
 
 DEPENDENCIES:
@@ -11,7 +11,7 @@ EXTERNAL SOURCES:
     :path: ../../
 
 SPEC CHECKSUMS:
-  SimpleCache: 54cf07a04f1c10f87d909812eb2f0e5a2f8263fe
+  SimpleCache: 141cd4988f9f6efeb360672409558f18b7a88f43
   SimpleLayout: a35138e1c02db15029fdac0720bf381b32b9800c
 
 PODFILE CHECKSUM: a45f670f10b00f151f3c00abf6b550e504fc8c0d
