@@ -33,7 +33,7 @@ class FirstViewController: BaseViewController
         log("Key: json\nValue: \(SimpleCache.get("json"))")
 
         // NSData
-        SimpleCache.put("data", value: NSData(bytes: [0xFF, 0xD9] as [UInt8], length: 2))
+        SimpleCache.put("data", value: Data(bytes: UnsafePointer<UInt8>([0xFF, 0xD9] as [UInt8]), count: 2))
         log("Key: data\nValue: \(SimpleCache.get("data"))")
 
         log("------------------------------")

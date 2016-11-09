@@ -10,29 +10,29 @@ import UIKit
 import SimpleCache
 import SimpleLayout
 
-public class MyCache: SimpleCacheProtocol
+open class MyCache: SimpleCacheProtocol
 {
 
-    private var cache: [String : AnyObject] = [:]
+    fileprivate var cache: [String : Any] = [:]
 
-    public func dictionaryRepresentation() -> [String : AnyObject] {
+    open func dictionaryRepresentation() -> [String : Any] {
         return cache
     }
 
-    public func get(key: String, defaultValue: AnyObject? = nil) -> AnyObject? {
+    open func get(_ key: String, defaultValue: Any? = nil) -> Any? {
         return cache[key]
     }
 
-    public func put(key: String, value: AnyObject?) {
+    open func put(_ key: String, value: Any?) {
         cache[key] = value
     }
 
-    public func has(key: String) -> Bool {
+    open func has(_ key: String) -> Bool {
         return get(key) != nil
     }
 
-    public func remove(key: String) -> AnyObject? {
-        return cache.removeValueForKey(key)
+    open func remove(_ key: String) -> Any? {
+        return cache.removeValue(forKey: key)
     }
     
 }
@@ -63,7 +63,7 @@ class SecondViewController: BaseViewController
         log("Key: json\nValue: \(SimpleCache.get("json"))")
 
         // NSData
-        SimpleCache.put("data", value: NSData(bytes: [0xFF, 0xD9] as [UInt8], length: 2))
+        SimpleCache.put("data", value: Data(bytes: UnsafePointer<UInt8>([0xFF, 0xD9] as [UInt8]), count: 2))
         log("Key: data\nValue: \(SimpleCache.get("data"))")
 
         log("------------------------------")

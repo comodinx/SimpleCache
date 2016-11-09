@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "SimpleCache"
-  s.version      = "0.2.1"
+  s.version      = "0.3.0"
   s.license      = { :type => "MIT", :file => "LICENSE" }
   s.summary      = "Simple Cache written in Swift"
   s.homepage     = "https://github.com/comodinx/SimpleCache"

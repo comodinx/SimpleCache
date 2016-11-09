@@ -1,6 +1,6 @@
 {
   "name": "SimpleCache",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
@@ -15,7 +15,7 @@
   },
   "source": {
     "git": "https://github.com/comodinx/SimpleCache.git",
-    "tag": "0.2.1"
+    "tag": "0.3.0"
   },
   "source_files": "Sources/*.swift"
 }

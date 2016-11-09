@@ -11,23 +11,23 @@ import UIKit
 public protocol SimpleCacheProtocol
 {
 
-    func dictionaryRepresentation() -> [String : AnyObject]
-    func get(key: String, defaultValue: AnyObject?) -> AnyObject?
-    func put(key: String, value: AnyObject?)
-    func has(key: String) -> Bool
-    func remove(key: String) -> AnyObject?
+    func dictionaryRepresentation() -> [String : Any]
+    func get(_ key: String, defaultValue: Any?) -> Any?
+    func put(_ key: String, value: Any?)
+    func has(_ key: String) -> Bool
+    @discardableResult func remove(_ key: String) -> Any?
 
 }
 
-public class SimpleCache: NSObject
+open class SimpleCache: NSObject
 {
 
-    private static let DEFAULT_CACHE_PREFIX = "user.cache."
+    fileprivate static let DEFAULT_CACHE_PREFIX = "user.cache."
 
-    public static var DEFAULT_CACHE_SECONDS: Int = 60
-    public static var CACHE_PROTOCOL: SimpleCacheProtocol = UserDefaultsCache.sharedInstance
+    open static var DEFAULT_CACHE_SECONDS: Int = 60
+    open static var CACHE_PROTOCOL: SimpleCacheProtocol = UserDefaultsCache.sharedInstance
 
-    public class func get(key: String, defaultValue: AnyObject? = nil) -> AnyObject?
+    open class func get(_ key: String, defaultValue: Any? = nil) -> Any?
     {
         let cache = CACHE_PROTOCOL.dictionaryRepresentation()
 
@@ -41,21 +41,21 @@ public class SimpleCache: NSObject
         return defaultValue
     }
 
-    public class func put(key: String, value: AnyObject?, seconds: Int = DEFAULT_CACHE_SECONDS)
+    open class func put(_ key: String, value: Any?, seconds: Int = DEFAULT_CACHE_SECONDS)
     {
-        let date = NSDate().dateByAddingTimeInterval(Double(seconds))
+        let date = Date().addingTimeInterval(Double(seconds))
         let timestamp = date.timeIntervalSince1970
         let cacheKey = getKey(Int(timestamp)) + key
 
         CACHE_PROTOCOL.put(cacheKey, value: value)
     }
 
-    public class func has(key: String) -> Bool
+    open class func has(_ key: String) -> Bool
     {
         return get(key) != nil
     }
 
-    public class func remove(key: String) -> AnyObject?
+    @discardableResult open class func remove(_ key: String) -> Any?
     {
         let cache = CACHE_PROTOCOL.dictionaryRepresentation()
 
@@ -67,42 +67,42 @@ public class SimpleCache: NSObject
         return nil
     }
 
-    public class func clear()
+    open class func clear()
     {
         let cache = CACHE_PROTOCOL.dictionaryRepresentation()
 
         for cacheKey in cache.keys {
             if cacheKey.hasPrefix(DEFAULT_CACHE_PREFIX) {
-                CACHE_PROTOCOL.remove(cacheKey)
+                _ = CACHE_PROTOCOL.remove(cacheKey)
             }
         }
     }
 
-    public class func cleanExpirated()
+    open class func cleanExpirated()
     {
         let cache = CACHE_PROTOCOL.dictionaryRepresentation()
 
         for cacheKey in cache.keys {
             if cacheKey.hasPrefix(DEFAULT_CACHE_PREFIX) && isExpirated(cacheKey) {
-                CACHE_PROTOCOL.remove(cacheKey)
+                _ = CACHE_PROTOCOL.remove(cacheKey)
             }
         }
     }
 
-    public class func isExpirated(key: String) -> Bool
+    open class func isExpirated(_ key: String) -> Bool
     {
         if !key.hasPrefix(DEFAULT_CACHE_PREFIX) {
             return false
         }
 
-        let now = Int(NSDate().timeIntervalSince1970)
+        let now = Int(Date().timeIntervalSince1970)
         let partsCacheKey = key.characters.split{$0 == "."}.map(String.init)
         let timestamp = Int(partsCacheKey[2])!
 
         return timestamp < now
     }
 
-    private class func getKey(timestamp: Int) -> String
+    fileprivate class func getKey(_ timestamp: Int) -> String
     {
         return DEFAULT_CACHE_PREFIX + String(timestamp) + "."
     }

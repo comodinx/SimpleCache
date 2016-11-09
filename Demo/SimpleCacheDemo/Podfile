@@ -4,6 +4,6 @@ use_frameworks!
 target "SimpleCacheDemo" do
 
     pod "SimpleCache", path: "../../"
-    pod "SimpleLayout"
+    pod "SimpleLayout", "0.2.1"
 
 end

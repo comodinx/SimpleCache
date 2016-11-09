@@ -1,19 +1,19 @@
 PODS:
-  - SimpleCache (0.2.1)
-  - SimpleLayout (0.1.1)
+  - SimpleCache (0.3.0)
+  - SimpleLayout (0.2.1)
 
 DEPENDENCIES:
   - SimpleCache (from `../../`)
-  - SimpleLayout
+  - SimpleLayout (= 0.2.1)
 
 EXTERNAL SOURCES:
   SimpleCache:
     :path: ../../
 
 SPEC CHECKSUMS:
-  SimpleCache: 141cd4988f9f6efeb360672409558f18b7a88f43
-  SimpleLayout: a35138e1c02db15029fdac0720bf381b32b9800c
+  SimpleCache: 6e99d97d97a72813108669974c740063253a0765
+  SimpleLayout: 71971a2175eeac4f82b926662b0cf66ff697103f
 
-PODFILE CHECKSUM: a45f670f10b00f151f3c00abf6b550e504fc8c0d
+PODFILE CHECKSUM: 27d8d82ed95c46cef5ba61193a26b6fd3178a974
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.2.0.beta.1
