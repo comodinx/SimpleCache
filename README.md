@@ -123,7 +123,7 @@ SimpleCache.CACHE_PROTOCOL = MyCache()
 ##### get
 
 ```swift
-SimpleCache.get(key: String, defaultValue: AnyObject? = nil)
+SimpleCache.get(key: String, defaultValue: Any? = nil)
 ```
 
 Return value for `key` in cache. If not has `key` in cache return `defaultValue`.
@@ -137,7 +137,7 @@ SimpleCache.get("not.exist.key2", defaultValue: 10) // return 10, because "not.e
 ##### put
 
 ```swift
-SimpleCache.put(key: String, value: AnyObject?, seconds: Int = DEFAULT_CACHE_SECONDS)
+SimpleCache.put(key: String, value: Any?, seconds: Int = DEFAULT_CACHE_SECONDS)
 ```
 
 Put `value` for `key` in cache. Expired in `seconds`.
@@ -196,7 +196,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // ...
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
 
         // Clean cache expirated keys
@@ -236,28 +236,28 @@ import SimpleCache
 public class MyCache: SimpleCacheProtocol
 {
 
-    private var cache: [String : AnyObject] = [:]
+    fileprivate var cache: [String : Any] = [:]
 
-    public func dictionaryRepresentation() -> [String : AnyObject] {
+    open func dictionaryRepresentation() -> [String : Any] {
         return cache
     }
 
-    public func get(key: String, defaultValue: AnyObject? = nil) -> AnyObject? {
+    open func get(_ key: String, defaultValue: Any? = nil) -> Any? {
         if let value = cache[key] {
             return value
         }
         return defaultValue
     }
 
-    public func put(key: String, value: AnyObject?) {
+    open func put(_ key: String, value: Any?) {
         cache[key] = value
     }
 
-    public func has(key: String) -> Bool {
+    open func has(_ key: String) -> Bool {
         return get(key) != nil
     }
 
-    public func remove(key: String) -> AnyObject? {
+    open func remove(_ key: String) -> Any? {
         return cache.removeValueForKey(key)
     }
     
@@ -268,7 +268,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // ...
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
 
         // Configure cache
